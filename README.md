@@ -53,6 +53,71 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Notes Penting tapi Ga penting
+
+### Beda file extension ts dan tsx
+
+#### (1). .ts (TypeScript)
+
+Dipakai untuk logic murni, tanpa JSX. Cocok untuk:
+
+- util / helper
+- service
+- API client
+- Redux / Zustand store
+- backend (Node.js)
+
+```ts
+type User = {
+  id: number;
+  name: string;
+};
+
+function getUserName(user: User): string {
+  return user.name;
+}
+```
+
+#### (2). .tsx (TypeScript + JSX)
+
+- Dipakai kalau file tersebut mengandung JSX / React component.
+- JSX (<h1>...</h1>) tidak bisa ditulis di file .ts.
+
+```tsx
+type Props = {
+  name: string;
+};
+
+const Hello = ({ name }: Props) => {
+  return <h1>Hello {name}</h1>;
+};
+
+export default Hello;
+```
+
+#### (3). Aturan Praktis (Best Practice)
+
+| Kondisi                   | Pakai  |
+| ------------------------- | ------ |
+| Tidak ada JSX             | `.ts`  |
+| Ada JSX / React Component | `.tsx` |
+
+Di Next.js / React:
+
+- utils.ts
+- services.ts
+- types.ts
+- components/Button.tsx
+- pages/index.tsx
+
+#### (4). Kalo Ada Error
+
+Kalau JSX ditulis di .ts, akan error seperti:
+
+```bash
+Cannot use JSX unless the '--jsx' flag is provided
+```
+
 ## Catatan Bawaan Dari Next JS
 
 ### Learn More
